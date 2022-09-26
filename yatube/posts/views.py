@@ -12,7 +12,6 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    #posts = Post.objects.filter(group=group)[:10]
     posts = group.groups.order_by('-pub_date')[:10]
     context = {
         'group': group,
