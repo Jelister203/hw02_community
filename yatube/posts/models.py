@@ -8,16 +8,24 @@ class Group(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
+    verbouse_name = 'Группы'
 
     def __str__(self):
-        return self.title
+        return f"Юзер {self.title}"
 
 
 class Post(models.Model):
+    verbouse_name = 'Посты'
     text = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User,
+                               related_name='authors',
+                               on_delete=models.CASCADE)
     group = models.ForeignKey(Group,
                               blank=True,
+                              related_name='groups',
                               null=True,
-                              on_delete=models.CASCADE)
+                              on_delete=models.DO_NOTHING)
+
+    class Meta:
+        ordering = ['-pub_date']
