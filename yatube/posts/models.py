@@ -11,7 +11,7 @@ class Group(models.Model):
     verbouse_name = 'Группы'
 
     def __str__(self):
-        return f"Юзер {self.title}"
+        return f"Группа {self.title}"
 
 
 class Post(models.Model):
@@ -19,13 +19,13 @@ class Post(models.Model):
     text = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User,
-                               related_name='authors',
+                               related_name='groups',
                                on_delete=models.CASCADE)
     group = models.ForeignKey(Group,
                               blank=True,
-                              related_name='groups',
+                              related_name='posts',
                               null=True,
-                              on_delete=models.DO_NOTHING)
+                              on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['-pub_date']
