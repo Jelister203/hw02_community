@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}
-<title>Записи сообщества {{group}}</title>
+<!--<title>Записи сообщества {{group}}</title>-->
 {% endblock%}
 {% block content %}
 {% for post in posts %}
+<article>
   <ul>
     <li>
       Автор: {{ post.author.get_full_name }}
@@ -15,6 +16,7 @@
     	{{post.group}}
     </li>
   </ul>
+</article>
   <p>{{ post.text }}</p>
   {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}
